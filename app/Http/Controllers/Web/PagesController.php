@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use Illuminate\Http\Request;
-use App\Models\Tweet;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 class PagesController extends Controller
 {
-    public function showWelcome() {
+    public function showWelcome(): \Inertia\Response
+    {
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -20,7 +19,8 @@ class PagesController extends Controller
         ]);
     }
 
-    public function showFeed () {
+    public function showFeed (): \Inertia\Response
+    {
         return Inertia::render('Feed');
     }
 }

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1\Tweets;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Tweet;
-use Illuminate\Support\Facades\Auth;
-use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 

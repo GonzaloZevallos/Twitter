@@ -4171,7 +4171,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       tweets: [],
       tweetsExists: true,
       currentPage: '',
-      nextPage: '/api/tweets/feed?page=1'
+      nextPage: this.route('getFeed')
     };
   },
   methods: {
@@ -4196,7 +4196,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     addTweet: function addTweet() {
       var _this2 = this;
 
-      axios.get('api/tweets/last').then(function (response) {
+      axios.get(this.route('getLast')).then(function (response) {
         _this2.tweets = [response.data.tweet].concat(_toConsumableArray(_this2.tweets));
       });
     }
@@ -6122,7 +6122,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.tweet.content === '' || this.contentCounter > 160) return;
       this.isLoading = true;
-      axios.post('api/tweets', {
+      axios.post(this.route('postATweet'), {
         content: this.tweet.content,
         author_id: 1
       }).then(function (response) {

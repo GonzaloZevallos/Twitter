@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\TweetApiController;
+//use \App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +14,34 @@ use App\Http\Controllers\Api\TweetApiController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::prefix('tweets')->group(function () {
-    Route::get('/feed', [TweetApiController::class, 'getFeed']);
-    Route::get('/last', [TweetApiController::class, 'getLast']);
-    Route::post('/', [TweetApiController::class, 'store']);
+
+//Route::group([
+//    'namespace' => 'Auth\V1\Auth'
+//], function () {
+//
+//});
+
+
+//Route::post('login', [AuthController::class, 'login']);
+//Route::post('register', [AuthController::class, 'register']);
+
+Route::group([
+    'prefix' => 'v1',
+//    'middleware' => ['auth:sanctum'],
+    'namespace' => 'Api\V1'
+], function () {
+
+    // Auth
+
+    // Tweets
+    Route::group([
+        'prefix' => 'tweets',
+        'namespace' => 'Tweets'
+    ],function () {
+        Route::get('/feed', 'TweetApiController@getFeed')->name('getFeed');
+        Route::get('/last', 'TweetApiController@getLast')->name('getLast');
+        Route::post('/', 'TweetApiController@store')->name('postATweet');
+    });
 });
 
 

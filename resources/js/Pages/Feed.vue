@@ -36,7 +36,7 @@
                 tweets: [],
                 tweetsExists: true,
                 currentPage: '',
-                nextPage: '/api/tweets/feed?page=1'
+                nextPage: this.route('getFeed')
             }
         },
         methods: {
@@ -57,7 +57,7 @@
                 .catch(e => console.log(e))
             },
             addTweet() {
-                axios.get('api/tweets/last')
+                axios.get(this.route('getLast'))
                 .then(response => {
                     this.tweets = [response.data.tweet, ...this.tweets];
                 })

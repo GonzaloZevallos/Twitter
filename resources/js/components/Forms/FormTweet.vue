@@ -45,7 +45,7 @@
 
                 this.isLoading = true;
 
-                axios.post('api/tweets', {
+                axios.post(this.route('postATweet'), {
                     content: this.tweet.content,
                     author_id: 1
                 })
