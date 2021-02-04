@@ -59309,77 +59309,88 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "my-12" }, [
-    _c("div", { staticClass: "mt-1 px-4 py-5 bg-white sm:p-6" }, [
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.tweet.content,
-            expression: "tweet.content"
-          }
-        ],
-        staticClass:
-          "overflow-hidden resize-none shadow-sm border-gray-300 focus:border-gray-400 mt-1 block w-full sm:text-sm rounded-md",
-        attrs: {
-          "data-limit-rows": "true",
-          name: "content",
-          rows: "3",
-          placeholder: "What's going on?"
-        },
-        domProps: { value: _vm.tweet.content },
-        on: {
-          keyup: function($event) {
-            return _vm.handleCounter()
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+  return _c(
+    "form",
+    {
+      staticClass: "my-12",
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.addTweet($event)
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "mt-1 px-4 py-5 bg-white sm:p-6" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.tweet.content,
+              expression: "tweet.content"
             }
-            _vm.$set(_vm.tweet, "content", $event.target.value)
+          ],
+          staticClass:
+            "overflow-hidden resize-none shadow-sm border-gray-300 focus:border-gray-400 mt-1 block w-full sm:text-sm rounded-md",
+          attrs: {
+            "data-limit-rows": "true",
+            name: "content",
+            rows: "3",
+            placeholder: "What's going on?"
+          },
+          domProps: { value: _vm.tweet.content },
+          on: {
+            keyup: _vm.handleCounter,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.tweet, "content", $event.target.value)
+            }
           }
-        }
-      }),
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex justify-end mt-2" }, [
+          _vm.contentCounter > 0
+            ? _c(
+                "small",
+                {
+                  staticClass: "right-0",
+                  class: { "text-red-600": _vm.contentCounter > 160 }
+                },
+                [_vm._v(_vm._s(_vm.contentCounter))]
+              )
+            : _vm._e()
+        ])
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex justify-end mt-2" }, [
-        _vm.contentCounter > 0
-          ? _c(
-              "small",
-              {
-                staticClass: "right-0",
-                class: { "text-red-600": _vm.contentCounter > 160 }
-              },
-              [_vm._v(_vm._s(_vm.contentCounter))]
-            )
-          : _vm._e()
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
+      _vm._m(0)
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
       "div",
-      {
-        staticClass: "px-4 py-3 bg-gray-50 flex justify-between sm:px-6",
-        on: {
-          click: function($event) {
-            return _vm.addTweet()
-          }
-        }
-      },
+      { staticClass: "px-4 py-3 bg-gray-50 flex justify-between sm:px-6" },
       [
         _c(
           "button",
           {
             staticClass:
-              "inline-flex justify-center py-2 px-4 border-none border-transparent text-sm font-medium rounded-md text-white bg-none text-gray-400 hover:text-gray-700 focus:outline-none"
+              "inline-flex justify-center py-2 px-4 border-none border-transparent text-sm font-medium rounded-md text-white bg-none text-gray-400 hover:text-gray-700 focus:outline-none",
+            attrs: { type: "submit" }
           },
           [_vm._v("Tweet")]
         )
       ]
     )
-  ])
-}
-var staticRenderFns = []
+  }
+]
 render._withStripped = true
 
 
