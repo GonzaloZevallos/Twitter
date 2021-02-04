@@ -23,15 +23,8 @@ class TweetApiController extends Controller
     }
 
     public function getFeed() {
-        $authId = 1;
 
-        $tweets = Tweet::whereNull('parent_id')->whereIn('author_id', function($query) use($authId) {
-
-            $query->select('followed_id')
-                ->from('follows')
-                ->where('follower_id', $authId);
-
-        })->orWhere('author_id', $authId)->whereNull('parent_id')->latest()->with('author')->with('likers')->with('responses')->paginate(10);
+        $tweets = User::first()->getFeed();
 
         return [
             'tweets' => $tweets,
@@ -41,7 +34,7 @@ class TweetApiController extends Controller
 
     public function getLast() {
         return [
-            'tweet' => Tweet::where('author_id', 1)->latest()->with('author')->with('likers')->with('responses')->first()
+            'tweet' => User::first()->getLast()
         ];
     }
 

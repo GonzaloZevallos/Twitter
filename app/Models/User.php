@@ -74,4 +74,18 @@ class User extends Authenticatable
     public function follows () {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
     }
+
+    public function getFeed () {
+        return Tweet::whereNull('parent_id')->whereIn('author_id', function($query)  {
+
+            $query->select('followed_id')
+                ->from('follows')
+                ->where('follower_id', $this->id);
+
+        })->orWhere('author_id', $this->id)->whereNull('parent_id')->latest()->with('author')->with('likers')->with('responses')->paginate(10);
+    }
+
+    public function getLast() {
+        return Tweet::where('author_id', $this->id)->latest()->with('author')->with('likers')->with('responses')->first();
+    }
 }
