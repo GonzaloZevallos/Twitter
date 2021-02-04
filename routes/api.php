@@ -14,15 +14,10 @@ use App\Http\Controllers\Api\TweetApiController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::post('/tweets', [TweetApiController::class, 'store']);
-Route::get('/tweets/feed', [TweetApiController::class, 'getFeed']);
-Route::get('/tweets/last', [TweetApiController::class, 'getLast']);
-
-//Route::prefix('api')->group(function() {
-//    Route::prefix('tweets')->group(function() {
-//        Route::post('/', [TweetApiController::class, 'store']);
-//    });
-//});
+Route::prefix('tweets')->group(function () {
+    Route::get('/feed', [TweetApiController::class, 'getFeed']);
+    Route::get('/last', [TweetApiController::class, 'getLast']);
+    Route::post('/', [TweetApiController::class, 'store']);
+});
 
 
